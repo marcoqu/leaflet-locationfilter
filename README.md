@@ -58,6 +58,8 @@ var isEnabled = locationFilter.isEnabled();
 
 #### Events
 
+**changestart**: Fired when the location filter starts to change size or position.
+
 **change**: Fired when the location filter changes size or position.
 
 **enabled**:: Fired when the location filter gets enabled.
