@@ -1,0 +1,25 @@
+{
+  "name": "leaflet.locationfilter",
+  "version": "0.1.0",
+  "description": "Provides a location filter for Leaflet.",
+  "main": "src/locationfilter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarcoQu/leaflet-locationfilter.git"
+  },
+  "keywords": [
+    "leaflet",
+    "map",
+    "filter"
+  ],
+  "author": "Robert Kajic <robert@kajic.com>",
+  "license": "MIT",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/MarcoQu/leaflet-locationfilter/issues"
+  },
+  "homepage": "https://github.com/MarcoQu/leaflet-locationfilter"
+}
