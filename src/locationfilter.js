@@ -100,7 +100,8 @@ L.LocationFilter = L.Class.extend({
         },
         adjustButton: {
             text: "Select area within current zoom"
-        }
+        },
+        buttonPosition: 'topleft'
     },
 
     initialize: function(options) {
@@ -191,6 +192,7 @@ L.LocationFilter = L.Class.extend({
             "anchor": [-10, -10],
             "size": [13,13]
         });
+        this._setupDragstartListener(this._moveMarker);
         this._moveMarker.on('drag', function(e) {
             var markerPos = that._moveMarker.getLatLng(),
                 latDelta = markerPos.lat-that._nw.lat,
@@ -219,6 +221,7 @@ L.LocationFilter = L.Class.extend({
        marker. Update filter corners and redraw the filter */
     _setupResizeMarkerTracking: function(marker, options) {
         var that = this;
+        this._setupDragstartListener(marker);
         marker.on('drag', function(e) {
             var curPosition = marker.getLatLng(),
                 latMarker = options.moveAlong.lat,
@@ -245,6 +248,15 @@ L.LocationFilter = L.Class.extend({
             that._draw({repositionResizeMarkers: false});
         });
         this._setupDragendListener(marker);
+    },
+
+    /* Emit a changestart event whenever dragstart is triggered on the
+       given marker */
+    _setupDragstartListener: function(marker) {
+        var that = this;
+        marker.on('dragstart', function(e) {
+            that.fire('changestart');
+        });
     },
 
     /* Emit a change event whenever dragend is triggered on the
@@ -468,7 +480,10 @@ L.LocationFilter = L.Class.extend({
        toggles the location filter */
     _initializeButtonContainer: function() {
         var that = this;
-        this._buttonContainer = new L.Control.ButtonContainer({className: "location-filter button-container"});
+        this._buttonContainer = new L.Control.ButtonContainer({
+            className: "location-filter button-container",
+            position: this.options.buttonPosition
+        });
 
         if (this.options.enableButton) {
             this._enableButton = new L.Control.Button({
